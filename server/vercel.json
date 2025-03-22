@@ -1,20 +1,21 @@
 {
     "version": 2,
-    "build": [
-        {
-            "src": "verver.js",
-            "use": "@vercel/node",
-            "config": {
-                "includeFiles": [
-                    "dist/**"
-                ]
-            }
+    "builds": [
+      {
+        "src": "verver.js",
+        "use": "@vercel/node",
+        "config": {
+          "includeFiles": [
+            "dist/**"
+          ]
         }
+      }
     ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dist": "verver.js"
-        }
+      {
+        "src": "/(.*)",
+        "dest": "verver.js"
+      }
     ]
-}
+  }
+  
