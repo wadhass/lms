@@ -2,22 +2,26 @@ import { createContext, useEffect, useState } from "react";
 import { dummyCourses } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import humanizeDuration from 'humanize-duration'
+import { useAuth, useUser} from "@clerk/clerk-react"
 
 export const AppContext = createContext()
 
 export const AppContextProvider = (props) => {
 
     const currency = import.meta.env.VITE_CURRENCY
-
     const navigate = useNavigate()
+    const {getToken} = useAuth()
+    const {user} = useUser()
 
     const [allCourses, setAllcourses] = useState([])
     const [isEducator, setIsEducator] = useState(true)
     const [enrolledCourses, setEnrolledCourses] = useState([])
 
     // Fetch All courses
-    const fetAllCourses = async () => {
+    const fetchAllCourses = async () => {
+        console.log("Fetching all courses...");
         setAllcourses(dummyCourses)
+        console.log("All courses fetched:", dummyCourses);
     }
 
     // Function to calculate average rating of course
@@ -62,14 +66,27 @@ export const AppContextProvider = (props) => {
 
       // Fetch User Enrolled Courses
         const fetchUserEnrolledCourses = async () => {
+            console.log("Fetching user enrolled courses...");
             setEnrolledCourses(dummyCourses)
+            console.log("User enrolled courses fetched:", dummyCourses);
         }
     
 
     useEffect(()=> {
-        fetAllCourses()
+        fetchAllCourses()
         fetchUserEnrolledCourses()
     }, [])
+
+    const logToken = async () => {
+        console.log("Fetching token...");
+        console.log( await getToken())
+    }
+
+    useEffect(() => {
+        if(user){
+            logToken()
+        }
+    }, [user])
 
     const value = {
         currency, allCourses, navigate, calculateRating, isEducator,
