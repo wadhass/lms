@@ -17,23 +17,20 @@ import mongoose from 'mongoose';
 
 // Connect to the MongoDB database
 const connectDB = async () => {
-    const mongoUrl = `${process.env.MONGODB_URL}/lms`;  // Add '/lms' at the end of the connection URL.
+  try {
+    // Connect to MongoDB using the connection string from environment variables
+    await mongoose.connect(process.env.MONGODB_URL, {
+      useNewUrlParser: true,    // Ensures MongoDB driver uses the latest URL parser
+      useUnifiedTopology: true, // Ensures MongoDB driver uses the new topology engine
+    });
 
-    console.log('Attempting to connect to MongoDB with URL:', mongoUrl); // Check the full URL for correctness
-
-    try {
-        await mongoose.connect(mongoUrl, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-
-        mongoose.connection.on('connected', () => {
-            console.log('Successfully connected to MongoDB');
-        });
-    } catch (error) {
-        console.error('Error connecting to MongoDB:', error.message);
-        // You can log more details here if needed
-    }
+    // Log successful connection
+    console.log('Database connected');
+  } catch (error) {
+    // Log error if connection fails
+    console.error('Error connecting to MongoDB:', error.message);
+    process.exit(1); // Exit the process if the database connection fails
+  }
 };
 
 export default connectDB;
