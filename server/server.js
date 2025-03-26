@@ -38,7 +38,6 @@
 //   console.log(`Server is running at ${PORT}`)
 // })
 
-
 import express from "express";
 import cors from "cors";
 import "dotenv/config";  // Automatically loads environment variables
@@ -49,14 +48,13 @@ import { clerkMiddleware } from "@clerk/express";
 import connectCloudinary from "./configs/cloudinary.js";
 import courseRouter from "./routes/courseRoute.js";
 import userRouter from "./routes/userRoute.js";
-import serverless from "serverless-http";
 
 // Initialize Express
 const app = express();
 
 const startServer = async () => {
   try {
-    await connectDB();
+    await connectDB(); // This will work with ESM
     await connectCloudinary();
 
     // Middlewares
@@ -84,4 +82,4 @@ const startServer = async () => {
 // Start server
 startServer();
 
-export default app;  // Exporting the app as default for use in serverless or other modules
+export default app;  // Exporting the app as default
