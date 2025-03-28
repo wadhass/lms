@@ -57,7 +57,7 @@ export const userEnrolledCourses = async (req, res) => {
 export const purchaseCourse = async (req, res) => {
     try {
         const { courseId } = req.body;
-        const origin = req.headers.origin || "https://server-added.onrender.com"; // fallback in case origin is missing
+        const origin = req.headers.origin || "http://localhost:3000"; // fallback in case origin is missing
         const clerkUserId = req.auth.userId; // Clerk user ID
 // http://localhost:3000
         // Find the user by Clerk ID
