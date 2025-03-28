@@ -85,7 +85,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { assets } from "../../assets/assets";
-import { AppContext } from "../../context/AppContexe"
+import { AppContext } from "../../context/AppContext"
 import { useParams } from "react-router-dom";
 import humanizeDuration from "humanize-duration";
 import YouTube from "react-youtube";

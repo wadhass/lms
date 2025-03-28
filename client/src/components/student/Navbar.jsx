@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { useContext } from "react";
-import { AppContext } from "../../context/AppContexe";
+import { AppContext } from "../../context/AppContext";
 
 const Navbar = () => {
 
@@ -55,7 +55,7 @@ const Navbar = () => {
            {
             user ? <UserButton/> 
             : <button onClick={openSignIn}><img src={assets.user_icon} alt="" /></button>
-           }
+      }
            
       </div>
     </div>

@@ -58,7 +58,7 @@
 
 
 import React, { useContext, useEffect, useState } from 'react'
-import { AppContext } from '../../context/AppContexe'
+import { AppContext } from '../../context/AppContext'
 import Loading from '../../components/student/Loading'
 
 const MyCourses = () => {

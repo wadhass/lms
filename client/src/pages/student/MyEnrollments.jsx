@@ -76,7 +76,7 @@
 
 
 import React, { useContext, useState } from 'react';
-import { AppContext } from '../../context/AppContexe'
+import { AppContext } from '../../context/AppContext'
 import { Line } from 'rc-progress';
 import Footer from '../../components/student/Footer';
 
