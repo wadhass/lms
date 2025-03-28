@@ -3,11 +3,28 @@ import { CourseProgress } from "../models/CourseProgress.js";
 import User from "../models/User.js";
 import Stripe from 'stripe';
 
-// Get User Data
+// // Get User Data
+// export const getUserData = async (req, res) => {
+//     try {
+//         const userId = req.auth.userId;
+//         const user = await User.findOne({ clerkId: userId }); // ✅ FIXED
+
+//         if (!user) {
+//             return res.status(404).json({ success: false, message: "User Not Found" });
+//         }
+
+//         res.json({ success: true, user });
+//     } catch (error) {
+//         res.status(500).json({ success: false, message: error.message });
+//     }
+// };
+
+
 export const getUserData = async (req, res) => {
     try {
+        console.log('User Auth Data:', req.auth);  // Debugging
         const userId = req.auth.userId;
-        const user = await User.findOne({ clerkId: userId }); // ✅ FIXED
+        const user = await User.findOne({ clerkId: userId });
 
         if (!user) {
             return res.status(404).json({ success: false, message: "User Not Found" });
@@ -18,6 +35,7 @@ export const getUserData = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
 
 // Users Enrolled Courses With Lecture Links 
 export const userEnrolledCourses = async (req, res) => {
